@@ -7,9 +7,6 @@
 #include <stdlib.h>
 
 using namespace std;
-using std::string;
-using std::stringstream;
-using std::ifstream;
 
 int findSum(string str)
 {
