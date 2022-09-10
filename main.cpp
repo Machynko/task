@@ -9,9 +9,39 @@
 using namespace std;
 using std::string;
 using std::stringstream;
-using std::cout; using std::cerr;
-using std::endl; using std::string;
 using std::ifstream;
+
+int findSum(string str)
+{
+    // A temporary string
+    string temp = "";
+
+    // holds sum of all numbers present in the string
+    int sum = 0;
+    char* pEnd;
+
+    // read each character in input string
+    for (char ch : str) {
+        // if current character is a digit
+        if (isdigit(ch))
+            temp += ch;
+
+            // if current character is an alphabet
+        else {
+            // increment sum by number found earlier
+            // (if any)
+            sum += strtoll(temp.c_str(), &pEnd, 10);
+
+            // reset temporary string to empty
+            temp = "";
+        }
+    }
+
+    // atoi(temp.c_str()) takes care of trailing
+    // numbers
+    return sum + strtoll(temp.c_str(), &pEnd, 10);
+}
+
 
 int main() {
 
@@ -19,7 +49,7 @@ int main() {
 
     srand(time(0));
     int random_numbers;
-    int array[5000];
+    long long int array[5000];
     int negattiv[18] = {-9,-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8, 9};
 
 
@@ -51,7 +81,6 @@ int main() {
     } else cout << "Unable to open file";
 
 
-    int num;
     string arr[5000];
     int i = 0;
     string line;
@@ -75,15 +104,21 @@ int main() {
 
     // Printing a string array of generated numbers converting first 9 elements to integers
 
-    int sum = 0;
+    long long int sum = 0;
+    char* pEnd;
 
-    for (int k = 0; k < 9; k++) {
-        array[k] = stoi(arr[k]);        // stoi function is converting string elements to integers elements
-        cout << array [k] << endl;
-        sum = sum + array [k];
+   for (int k = 0; k < 19; k++) {
+        array[k] = strtoull(arr[k].c_str(), &pEnd, 10);
+        cout << array[k] << endl;   // stoi function is converting string elements to integers elements
+        sum = sum + array[k];
     }
-    cout << endl;
-    cout << "Summary of first 9 generated numbers  is " << sum ;
+
+   cout << endl;
+   cout << "Summary of first 19 generated numbers  is " << sum ;
+
+
+
+
 
 
     return 0;
